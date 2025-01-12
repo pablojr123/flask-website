@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="navbar">
+            <a href="/" class="nav-item"><i class="fas fa-home"></i> Home</a>
+            <a href="/page/1" class="nav-item"><i class="fas fa-futbol"></i> Page</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Football Match Prediction</h1>
+
+        <!-- Search bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for teams or results..." onkeyup="filterTable()">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- Tabel -->
+        <table id="predictionTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Home Team</th>
+                    <th>Away Team</th>
+                    <th>HTOa</th>
+                    <th>ATOa</th>
+                    <th>Match Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_data %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ row['HomeTeam'] }}</td>
+                    <td>{{ row['AwayTeam'] }}</td>
+                    <td>{{ row['HTOa'] }}</td>
+                    <td>{{ row['ATOa'] }}</td>
+                    <td>
+                        {% if row['FTR'] == 'H' %}
+                            Home Win
+                        {% elif row['FTR'] == 'A' %}
+                            Away Win
+                        {% elif row['FTR'] == 'D' %}
+                            Draw
+                        {% else %}
+                            Invalid or Missing Data
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="/page/{{ page - 1 }}?search={{ search_query }}">Previous</a>
+            {% endif %}
+            <span>Page {{ page }} of {{ total_pages }}</span>
+            {% if page < total_pages %}
+                <a href="/page/{{ page + 1 }}?search={{ search_query }}">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        <p>Made by Kelompok 18 with ❤️</p>
+    </footer>
+
+    <script>
+        var allTableData = JSON.parse('{{ table_data_json | safe }}');
+        
+        function filterTable() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const tableBody = document.querySelector('#predictionTable tbody');
+            tableBody.innerHTML = '';
+
+            const filteredData = allTableData.filter(row => {
+                return Object.values(row).some(value => 
+                    value.toString().toLowerCase().includes(input)
+                );
+            });
+
+            filteredData.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${row.HomeTeam}</td>
+                    <td>${row.AwayTeam}</td>
+                    <td>${row.HTOa}</td>
+                    <td>${row.ATOa}</td>
+                    <td>
+                        ${row.FTR === 'H' ? 'Home Win' : row.FTR === 'A' ? 'Away Win' : row.FTR === 'D' ? 'Draw' : 'Invalid or Missing Data'}
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+/* General page styling */
+body {
+    background-color: #212529; /* Latar belakang hitam */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Memusatkan secara horizontal */
+    align-items: flex-start; /* Mengatur elemen agar berada di atas */
+    min-height: 100vh; /* Memastikan tinggi halaman penuh */
+    padding-bottom: 80px; /* Memberikan jarak untuk footer */
+}
+
+/* Navbar styling */
+nav {
+    background-color: #343a40; /* Warna navbar yang lebih gelap */
+    width: 100%;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    z-index: 1000;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: #007bff; /* Warna biru saat hover */
+}
+
+/* Container styling */
+.container {
+    max-width: 900px;
+    background: #343a40; /* Warna gelap untuk container */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Pastikan isi dimulai dari atas */
+    align-items: center;
+    margin-top: 80px; /* Memberikan jarak untuk navbar */
+    min-height: 80vh;
+    margin-bottom: 80px; /* Memberikan jarak agar footer tidak tertutup */
+}
+
+/* Heading styling */
+h1 {
+    color: #ffffff;  /* Judul berwarna putih */
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+/* Intro styling */
+.intro {
+    background-color: #495057;
+    padding: 50px;
+    margin: 20px 0;
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+}
+
+.intro h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.intro p {
+    color: #dddddd;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Navigation styling */
+.navigation {
+    background-color: #495057;
+    padding: 50px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.navigation h3 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.navigation p {
+    color: #dddddd;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.navigation .btn {
+    text-decoration: none;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.navigation .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #495057; /* Warna tabel gelap */
+}
+
+thead {
+    background-color: #495057; /* Header tabel gelap */
+    color: #ffffff;
+}
+
+th, td {
+    padding: 15px 20px;
+    border: 1px solid #dee2e6;
+    color: #ffffff;
+    text-align: center; /* Pastikan teks berada di tengah */
+}
+
+tbody tr:hover {
+    background-color: #6c757d; /* Hover effect dengan warna abu gelap */
+}
+
+/* Styling untuk pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: white; /* Warna teks putih untuk konsisten dengan halaman */
+}
+
+.pagination a {
+    text-decoration: none;
+    color: white; /* Warna teks putih */
+    margin: 0 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #212529; /* Warna latar belakang gelap */
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #444; /* Latar belakang saat hover */
+}
+
+.pagination span {
+    margin: 0 10px;
+    font-weight: bold;
+    color: white; /* Menjaga konsistensi warna */
+}
+
+
+/* Footer styling */
+footer {
+    background-color: #343a40; /* Footer dengan latar belakang gelap */
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .pagination a {
+        padding: 6px 12px;
+    }
+
+    .intro h2, .navigation h3 {
+        font-size: 20px;
+    }
+
+    .intro p, .navigation p {
+        font-size: 16px;
+    }
+}
+
+/* Styling untuk dropdown (select) */
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #495057;
+    border-radius: 5px;
+    background-color: #6c757d;
+    color: #ffffff;
+    outline: none;
+    margin-bottom: 20px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+select:hover {
+    background-color: #5a6268;
+}
+
+select:focus {
+    box-shadow: 0 0 5px #007bff;
+    background-color: #5a6268;
+}
+
+/* Styling untuk button */
+button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #003f7f;
+    transform: scale(1);
+}
+
+/* Styling untuk heading "Predict Match Score" */
+.prediction-form h2 {
+    color: #ffffff; /* Warna teks putih */
+    font-family: 'Arial', sans-serif; /* Font yang sama dengan teks lainnya */
+    font-size: 24px; /* Ukuran font */
+    font-weight: bold; /* Teks tebal */
+    margin-bottom: 20px;
+}
+
+/* Styling untuk label (Select Team 1, Select Team 2) */
+.prediction-form label {
+    color: #ffffff; /* Warna teks putih */
+    font-family: 'Arial', sans-serif; /* Font yang sama dengan teks lainnya */
+    font-size: 18px; /* Ukuran font */
+    font-weight: normal; /* Teks normal */
+    display: block; /* Menjadikan label di baris baru */
+    margin-bottom: 10px;
+    text-align: left; /* Penempatan teks kiri */
+}
+
+/* Styling untuk search bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #212529; /* Gelap yang lebih lembut, serasi dengan background */
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-bar input {
+    width: 90%;
+    padding: 12px;
+    background-color: #343a40; /* Latar belakang input sedikit lebih terang */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.search-bar input:focus {
+    outline: none;
+    background-color: #343a40; /* Saat fokus lebih terang */
+}
+
+.search-bar .search-icon {
+    font-size: 20px;
+    color: white;
+    margin-left: 10px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #495057; /* Warna tabel gelap */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #6c757d; /* Header tabel */
+    color: #ffffff;
+}
+
+th, td {
+    padding: 15px 20px;
+    border: 1px solid #dee2e6;
+    color: #ffffff;
+}
+
+tbody tr:hover {
+    background-color: #6c757d; /* Hover effect */
+}
+
+/* Menetapkan warna teks putih dan font yang konsisten untuk prediction-result */
+.prediction-result {
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Menetapkan warna hijau dan merah untuk pemenang dan yang kalah */
+.winner {
+    color: green;
+}
+
+.loser {
+    color: red;
+}
+
+/* Styling untuk Search Team */
+.search-team-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #343a40; /* Latar belakang gelap untuk konsistensi */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-team-container label {
+    color: #ffffff; /* Warna teks label konsisten dengan yang lain */
+    font-size: 18px;
+    font-weight: normal;
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.search-team-container select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #495057; /* Latar belakang dropdown serasi */
+    color: #ffffff;
+    border: 1px solid #495057;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.search-team-container select:hover {
+    background-color: #5a6268; /* Efek hover pada dropdown */
+}
+
+.search-team-container select:focus {
+    background-color: #5a6268;
+    box-shadow: 0 0 5px #007bff; /* Highlight saat fokus */
+}
+
+.search-team-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-team-container button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.search-team-container button:active {
+    background-color: #003f7f;
+    transform: scale(1);
+}
+
+/* Styling untuk highlight tim yang dipilih */
+.highlight {
+    background-color: #ffeb3b;  /* Warna highlight */
+    color: #000;  /* Warna teks lebih kontras */
+}
+

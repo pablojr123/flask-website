@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Prediction - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="navbar">
+            <a href="/" class="nav-item"><i class="fas fa-home"></i> Home</a>
+            <a href="/page/1" class="nav-item"><i class="fas fa-futbol"></i> Page</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Welcome to Football Match Prediction</h1>
+
+        <!-- Dropdown untuk memilih tim dan tombol search -->
+        <div class="search-team-container">
+            <label for="teamDropdown">Select Team to Highlight:</label>
+            <select id="teamDropdown">
+                <option value="" disabled selected>Select a team</option>
+                {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+            <button onclick="searchAndHighlightTeam()">Search Team</button>
+        </div>
+
+        <!-- Bagian Grafik -->
+        <div class="chart" id="chart">
+            {{ graph_html | safe }}
+        </div>
+
+        <!-- Form untuk prediksi skor -->
+        <div class="prediction-form">
+            <h2>Predict Match Score</h2>
+            <form method="POST">
+                <label for="team1">Select Team 1:</label>
+                <select name="team1" id="team1" required>
+                    <option value="" disabled selected>Select a team</option>
+                    {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="team2">Select Team 2:</label>
+                <select name="team2" id="team2" required>
+                    <option value="" disabled selected>Select a team</option>
+                    {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit" class="btn">Predict</button>
+            </form>
+        </div>
+        {% if prediction %}
+        <div class="prediction-result">
+            <h3>Prediction Result</h3>
+            <p>
+                <strong class="{{ 'winner' if prediction.score1 > prediction.score2 else 'loser' }}">{{ prediction.team1 }}</strong> 
+                ({{ prediction.score1 }}) vs 
+                <strong class="{{ 'winner' if prediction.score2 > prediction.score1 else 'loser' }}">{{ prediction.team2 }}</strong> 
+                ({{ prediction.score2 }})
+            </p>
+            <p>Predicted Outcome: {{ prediction.outcome }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>Made by Kelompok 18 with ❤️</p>
+    </footer>
+    <script>
+    // Render grafik awal dengan data dari server
+    fetch('/graph-data')
+        .then(response => response.json())
+        .then(data => {
+            const trace = {
+                x: data.x,
+                y: data.y,
+                mode: 'markers',
+                hovertext: data.hovertext,
+                marker: { size: 10, color: 'blue' }
+            };
+
+            const layout = {
+                title: 'Team Performance',
+                xaxis: { title: 'Matches' },
+                yaxis: { title: 'Scores' }
+            };
+
+            Plotly.newPlot('chart', [trace], layout);
+        })
+        .catch(error => console.error('Error loading graph data:', error));
+
+        function searchAndHighlightTeam() {
+        const selectedTeam = document.getElementById('teamDropdown').value;
+
+        if (selectedTeam) {
+            // Ambil elemen grafik
+            const graphElement = document.getElementById('chart');
+
+            // Ambil data dari grafik
+            const graphData = graphElement.data[0]; // Grafik pertama (trace pertama)
+
+            if (graphData) {
+                // Filter data berdasarkan tim yang dipilih
+                const filteredX = [];
+                const filteredY = [];
+                const filteredHovertext = [];
+
+                for (let i = 0; i < graphData.hovertext.length; i++) {
+                    if (graphData.hovertext[i] === selectedTeam) {
+                        filteredX.push(graphData.x[i]);
+                        filteredY.push(graphData.y[i]);
+                        filteredHovertext.push(graphData.hovertext[i]);
+                    }
+                }
+
+                // Update grafik dengan data yang difilter
+                const update = {
+                    x: [filteredX],
+                    y: [filteredY],
+                    hovertext: [filteredHovertext]
+                };
+
+                Plotly.restyle('chart', update);
+            } else {
+                console.error("Graph data is missing.");
+            }
+        } else {
+            alert("Please select a team.");
+        }
+    }
+    </script>    
+</body>
+</html>
