@@ -1,0 +1,10 @@
+import joblib
+
+# Save trained model
+joblib.dump(model, "model.pkl")
+
+# Save label encoder
+joblib.dump(label_encoder, "label_encoder.pkl")
+
+# Save scaler
+joblib.dump(scaler, "scaler.pkl")
